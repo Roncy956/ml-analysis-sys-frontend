@@ -1,5 +1,5 @@
 <template>
-    <div ref="chartRef" style="width: 100%; height: 100%;"></div>
+    <div ref="chartRef" class="w-full h-full"></div>
 </template>
 
 <script setup>
@@ -22,8 +22,8 @@ const getOption = () => ({
     grid: {
         left: '5%',     // 使用百分比可以更好地适应宽屏
         right: '5%',
-        top: 60,
-        bottom: 30,
+        top: '20%',
+        bottom: '5%',
         containLabel: true
     },
     xAxis: { data: props.xData },

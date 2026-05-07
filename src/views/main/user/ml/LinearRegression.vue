@@ -1,6 +1,6 @@
 <script setup>
 import BarChart from "@/components/echarts/BarChart.vue";
-import { ref } from "vue";
+import {ref} from "vue";
 import LineChart from "@/components/echarts/LineChart.vue";
 
 const barChartTitle = ref('Vue + ECharts 示例')
@@ -10,35 +10,45 @@ const barSeriesName = ref('销量')
 </script>
 
 <template>
-    <div class="hero">
+    <div class="hero flex flex-col gap-10 p-10 items-center">
+        <div class="flex flex-row gap-10 h-2/5 w-full justify-center">
+            <div class="card card-body bg-bas/e-150 shadow-sm">
+
+            </div>
+        </div>
+
         <!-- 移动端垂直排列，桌面端水平排列，间距 gap-10 -->
-        <div class="hero-content text-center flex flex-col md:flex-row gap-10">
+        <div class="flex flex-row gap-10 h-3/5 w-full justify-center">
 
             <!-- 卡片 1：等宽 flex-1，阴影，圆角 -->
-            <div class="card bg-base-150 shadow-sm flex-1">
-                <!-- 关键：给 card-body 一个固定高度（例如 h-80），并移除内边距 -->
-                <div class="card-body p-0 h-80 w-120">
-                    <BarChart
-                        :title="barChartTitle"
-                        :xData="barXData"
-                        :series="barSeries"
-                        :series-name="barSeriesName"
-                    />
-                </div>
+            <div class="card card-body p-0 bg-base-150 shadow-sm h-full w-5/16">
+                <BarChart
+                    :title="barChartTitle"
+                    :xData="barXData"
+                    :series="barSeries"
+                    :series-name="barSeriesName"
+                />
             </div>
 
             <!-- 卡片 2：同样等宽，高度一致 -->
-            <div class="card bg-base-150 shadow-sm flex-1">
-                <div class="card-body p-0 h-80 w-120">
-                    <LineChart
-                        :title="barChartTitle"
-                        :xData="barXData"
-                        :series="barSeries"
-                        :series-name="barSeriesName"
-                    />
-                </div>
+            <div class="card card-body p-0 bg-base-150 shadow-sm h-full w-5/16">
+                <LineChart
+                    :title="barChartTitle"
+                    :xData="barXData"
+                    :series="barSeries"
+                    :series-name="barSeriesName"
+                />
             </div>
 
+            <!-- 卡片 3：等宽 flex-1，阴影，圆角 -->
+            <div class="card card-body p-0 bg-base-150 shadow-sm h-full w-5/16">
+                <BarChart
+                    :title="barChartTitle"
+                    :xData="barXData"
+                    :series="barSeries"
+                    :series-name="barSeriesName"
+                />
+            </div>
         </div>
     </div>
 </template>
