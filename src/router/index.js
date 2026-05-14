@@ -5,7 +5,7 @@ import SVM from "@/views/main/user/ml/SVM.vue";
 import MainFrame from "@/views/main/user/MainFrame.vue";
 import Profile from "@/views/main/user/Profile.vue";
 import KNN from "@/views/main/user/ml/KNN.vue";
-import LinearRegression from "@/views/main/user/ml/LinearRegression.vue";
+import ValueMap from "@/views/main/user/ml/ValueMap.vue";
 import LogisticRegression from "@/views/main/user/ml/LogisticRegression.vue";
 import DecisionTree from "@/views/main/user/ml/DecisionTree.vue";
 import RandomForest from "@/views/main/user/ml/RandomForest.vue";
@@ -47,8 +47,8 @@ const router = createRouter({
                     component: DataView,
                     children: [
                         {
-                            path: 'linear-regression',
-                            component: LinearRegression,
+                            path: 'value-map',
+                            component: ValueMap,
                         },
                         {
                             path: 'logistic-regression',

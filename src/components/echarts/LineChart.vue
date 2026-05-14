@@ -27,7 +27,10 @@ const props = defineProps({
     xData: Array,
     series: Array,
     seriesName: String,
-    showDialog: Boolean
+    showDialog: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const chartRef = ref(null)
@@ -39,7 +42,7 @@ const getOption = () => ({
     grid: {
         left: '5%',     // 使用百分比可以更好地适应宽屏
         right: '5%',
-        top: '20%',
+        top: '10%',
         bottom: '5%',
         containLabel: true
     },

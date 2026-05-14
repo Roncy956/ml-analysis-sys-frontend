@@ -6,10 +6,10 @@
     <!-- Put this part before </body> tag -->
     <input v-if="showDialog" type="checkbox" id="my_modal_bar_char" class="modal-toggle"/>
     <div v-if="showDialog" class="modal" role="dialog">
-        <div class="modal-box w-10/12 max-w-4xl h-4/5">
+        <div class="modal-box w-11/12 max-w-6xl h-4/5">
             <BarChart
                 :title="title"
-                :xData="xData"
+                :yData="yData"
                 :series="series"
                 :series-name="seriesName"
                 :show-dialog="false"/>
@@ -24,10 +24,13 @@ import * as echarts from 'echarts'
 
 const props = defineProps({
     title: String,
-    xData: Array,
+    yData: Array,
     series: Array,
     seriesName: String,
-    showDialog: Boolean
+    showDialog: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const chartRef = ref(null)
@@ -39,12 +42,14 @@ const getOption = () => ({
     grid: {
         left: '5%',     // 使用百分比可以更好地适应宽屏
         right: '5%',
-        top: '20%',
+        top: '10%',
         bottom: '5%',
         containLabel: true
     },
-    xAxis: {data: props.xData},
-    yAxis: {},
+    // 原 xAxis 改为 yAxis（类目轴，承载原X轴的分类数据）
+    yAxis: {type: 'category', data: props.yData},
+    // 原 yAxis 改为 xAxis（数值轴，承载数值）
+    xAxis: {type: 'value'},
     animation: true,
     animationDuration: 1000,
     series: [{

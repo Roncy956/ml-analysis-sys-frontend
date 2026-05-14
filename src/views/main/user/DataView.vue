@@ -6,10 +6,10 @@ const showText = ref(false);
 
 const activePath = ref();
 const menu = [
-    { name: '线性回归 Linear Regression', path: '/data-analysis/linear-regression' },
+    { name: '中国沿海各省数据分布', path: '/data-analysis/value-map' },
+    { name: '随机森林 Random Forest', path: '/data-analysis/random-forest' },
     { name: '逻辑回归 Logistic Regression', path: '/data-analysis/logistic-regression' },
     { name: '决策树 Decision Tree', path: '/data-analysis/decision-tree' },
-    { name: '随机森林 Random Forest', path: '/data-analysis/random-forest' },
     { name: '支持向量机 SVM', path: '/data-analysis/svm' },
     { name: 'K-最近邻 KNN', path: '/data-analysis/knn' },
     { name: '朴素贝叶斯 Naive Bayes', path: '/data-analysis/naive-bayes' },
@@ -38,8 +38,8 @@ watch(showText, (newVal, oldVal) => {
 });
 
 onMounted(() => {
-    activePath.value = '/data-analysis/linear-regression';
-    router.push('/data-analysis/linear-regression');
+    activePath.value = '/data-analysis/value-map';
+    router.push('/data-analysis/value-map');
 });
 </script>
 
