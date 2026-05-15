@@ -18,7 +18,6 @@ onMounted(async () => {
     const res = await getMapData();
     if (res.code === 1) {
         allData.value = res.data; // 确保这是 [{year, data}, ...] 格式
-        console.log('allData loaded:', allData.value);
     } else {
         console.error('Failed to load map data', res);
     }
@@ -32,8 +31,6 @@ watch(
         const targetYear = currentYear.value;
         const matched = allData.value.find(item => item.year === targetYear);
         mapData.value = matched ? matched.data : [];
-        console.log(`[Watch] year=${targetYear}, mapData length=${mapData.value.length}`);
-        console.log(mapData.value)
     },
 );
 </script>

@@ -45,7 +45,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-50">
         <div class="navbar-start">
             <ThemeSelect/>
         </div>
@@ -93,12 +93,8 @@ onMounted(() => {
     </div>
 
     <!-- 子路由内容渲染区域 -->
-    <div style="flex: 1; display: flex; padding: 0; overflow: auto;">
+    <div class="flex w-full h-full p-0">
         <RouterView />
     </div>
 
 </template>
-
-<style scoped>
-/* 你的样式 */
-</style>

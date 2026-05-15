@@ -1,16 +1,13 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Homepage from "@/views/main/user/Homepage.vue";
 import DataView from "@/views/main/user/DataView.vue";
-import SVM from "@/views/main/user/ml/SVM.vue";
 import MainFrame from "@/views/main/user/MainFrame.vue";
 import Profile from "@/views/main/user/Profile.vue";
-import KNN from "@/views/main/user/ml/KNN.vue";
 import ValueMap from "@/views/main/user/ml/ValueMap.vue";
-import LogisticRegression from "@/views/main/user/ml/LogisticRegression.vue";
-import DecisionTree from "@/views/main/user/ml/DecisionTree.vue";
 import RandomForest from "@/views/main/user/ml/RandomForest.vue";
-import NaiveBayes from "@/views/main/user/ml/NaiveBayes.vue";
-import GradientBoosting from "@/views/main/user/ml/GradientBoosting.vue";
+import XGBoost from "@/views/main/user/ml/XGBoost.vue";
+import LightGBM from "@/views/main/user/ml/LightGBM.vue";
+import CatBoost from "@/views/main/user/ml/CatBoost.vue";
 import PersonalHomepage from "@/views/main/user/profile/PersonalHomepage.vue";
 import PersonalSetting from "@/views/main/user/profile/PersonalSetting.vue";
 import AuthForm from "@/views/auth/AuthForm.vue";
@@ -51,33 +48,21 @@ const router = createRouter({
                             component: ValueMap,
                         },
                         {
-                            path: 'logistic-regression',
-                            component: LogisticRegression,
-                        },
-                        {
-                            path: 'decision-tree',
-                            component: DecisionTree,
-                        },
-                        {
                             path: 'random-forest',
                             component: RandomForest,
                         },
                         {
-                            path: 'svm',
-                            component: SVM,
+                            path: 'xgboost',
+                            component: XGBoost,
                         },
                         {
-                            path: 'knn',
-                            component: KNN,
+                            path: 'light-gbm',
+                            component: LightGBM,
                         },
                         {
-                            path: 'naive-bayes',
-                            component: NaiveBayes,
+                            path: 'cat-boost',
+                            component: CatBoost,
                         },
-                        {
-                            path: 'gradient-boosting',
-                            component: GradientBoosting,
-                        }
                     ]
                 },
             ]

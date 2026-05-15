@@ -2,7 +2,7 @@
 import BarChart from "@/components/echarts/BarChart.vue";
 import {onMounted, onUnmounted, ref, watch} from "vue";
 import ScatterPredictionChart from "@/components/echarts/ScatterPredictionChart.vue";
-import { getRandomForestData } from "@/api/result.js";
+import {getLightGBMData} from "@/api/result.js";
 import ScatterResidualChart from "@/components/echarts/ScatterResidualChart.vue";
 import Cube from "@/components/Cube.vue";
 
@@ -77,7 +77,7 @@ const formatNumber = (num) => {
 // 挂载时添加监听
 onMounted(async () => {
     window.addEventListener('resize', handleWindowResize);
-    const res = await getRandomForestData()
+    const res = await getLightGBMData()
     if (res.code === 1) {
         feature.value = res.data.feature_importance.map(item => item.feature).reverse();
         importance.value = res.data.feature_importance.map(item => item.importance).reverse();
@@ -110,7 +110,7 @@ onUnmounted(() => {
                     <Cube v-if="isWindowMaximized" class="mx-10 my-8"/>
                     <div class="card card-body px-10 h-full flex flex-row shadow-sm items-center justify-between">
                         <div class="flex flex-col text-4xl">
-                            随机森林<br>模型性能评估：
+                            LightGBM<br>模型性能评估：
                         </div>
                         <div class="flex flex-col">
                             <div class="text-1xl">
@@ -190,8 +190,8 @@ onUnmounted(() => {
                     :yData="residualsList"
                     :xAxisName="residualsPredictedListName"
                     :yAxisName="residualsListName"
-                    :start-zoom="10"
-                    :end-zoom="20"
+                    :start-zoom="7"
+                    :end-zoom="17"
                 />
             </div>
         </div>

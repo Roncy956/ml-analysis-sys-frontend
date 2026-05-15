@@ -1,14 +1,22 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {processSvg} from "@/utils/SvgUtil.js";
+import HeadSvgRaw from "@/assets/head.svg?raw";
+import SettingSvgRaw from "@/assets/setting.svg?raw";
+
+const HeadSvgHtml = processSvg(HeadSvgRaw);
+const SettingSvgHtml = processSvg(SettingSvgRaw);
+
+const menu = [
+    {name: '个人信息', path: '/profile/personal-homepage', iconHtml: HeadSvgHtml},
+    {name: '修改信息', path: '/profile/personal-setting', iconHtml: SettingSvgHtml},
+]
 
 const showText = ref(false)
 
 const activePath = ref()
-const menu = [
-    {name: '个人信息', path: '/profile/personal-homepage'},
-    {name: '修改信息', path: '/profile/personal-setting'},
-]
+
 const router = useRouter()
 const handleClick = (item) => {
     activePath.value = item.path
@@ -30,18 +38,7 @@ onMounted(() => {
                    :data-tip="showText ? '' : item.name"
                    :class="{ 'menu-active' : activePath === item.path }"
                    @click="handleClick(item)">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-7 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                    </svg>
+                    <span v-html="item.iconHtml"></span>
                     {{ showText ? item.name : '' }}
                 </a>
             </li>

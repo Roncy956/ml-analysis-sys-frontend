@@ -25,7 +25,7 @@ onMounted(() => {
     // 初始配置（data 先设为空）
     const baseOption = {
         title: {
-            text: '中国沿海各省份数据分布',
+            text: '中国大陆沿海各省份数据分布',
             left: 'center',
             top: 20
         },

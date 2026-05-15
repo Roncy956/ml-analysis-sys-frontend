@@ -3,7 +3,7 @@
 
     <!-- 放大弹窗 -->
     <label v-if="showDialog" for="my_modal_scatter_residual" class="btn">放大查看</label>
-    <input v-if="showDialog" type="checkbox" id="my_modal_scatter_residual" class="modal-toggle" />
+    <input v-if="showDialog" type="checkbox" id="my_modal_scatter_residual" class="modal-toggle"/>
     <div v-if="showDialog" class="modal">
         <div class="modal-box w-11/12 max-w-6xl h-4/5">
             <!-- 弹窗中的图表也传入相同的数据 prop -->
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref, watch } from 'vue'
+import {onMounted, onBeforeUnmount, ref, watch} from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
@@ -47,6 +47,14 @@ const props = defineProps({
     showDialog: {
         type: Boolean,
         default: true
+    },
+    startZoom: {
+        type: Number,
+        default: 5
+    },
+    endZoom: {
+        type: Number,
+        default: 20
     }
 })
 
@@ -60,7 +68,7 @@ let myChart = null
  */
 const getOption = (scatterData, lineData) => {
     return {
-        title: { text: props.title || '散点图', left: 'center' },
+        title: {text: props.title || '散点图', left: 'center'},
         tooltip: {
             trigger: 'item',
             formatter: (params) => {
@@ -71,14 +79,14 @@ const getOption = (scatterData, lineData) => {
                 return null
             }
         },
-        grid: { left: '5%', right: '5%', top: '10%', bottom: '15%', containLabel: true }, // 底部留出更多空间给dataZoom
+        grid: {left: '5%', right: '5%', top: '10%', bottom: '15%', containLabel: true}, // 底部留出更多空间给dataZoom
         xAxis: {
             type: 'value',
             name: props.xAxisName,
             nameLocation: 'center',   // 确保名称居中于横轴中间
-            nameTextStyle: { fontSize: 12, fontWeight: 'bold' },
+            nameTextStyle: {fontSize: 12, fontWeight: 'bold'},
             nameGap: 30,
-            axisLabel: { fontSize: 10 },
+            axisLabel: {fontSize: 10},
             scale: true, // 开启缩放适配，配合dataZoom
             zoomLock: false
         },
@@ -86,9 +94,9 @@ const getOption = (scatterData, lineData) => {
             type: 'value',
             name: props.yAxisName,
             nameLocation: 'center',   // 确保名称居中于纵轴中间
-            nameTextStyle: { fontSize: 12, fontWeight: 'bold' },
+            nameTextStyle: {fontSize: 12, fontWeight: 'bold'},
             nameGap: 40,
-            axisLabel: { fontSize: 10 },
+            axisLabel: {fontSize: 10},
             scale: true, // 纵轴仍保留缩放适配，但不跟随横轴同步
             zoomLock: true // 锁定纵轴缩放，禁止主动缩放
         },
@@ -99,19 +107,19 @@ const getOption = (scatterData, lineData) => {
                 show: true,
                 xAxisIndex: 0, // 仅绑定x轴
                 // 移除 yAxisIndex 配置，取消纵轴绑定
-                start: 10, // 初始缩放起始位置（0%）
-                end: 20, // 初始缩放结束位置（100%）
+                start: props.startZoom, // 初始缩放起始位置（0%）
+                end: props.endZoom, // 初始缩放结束位置（100%）
                 bottom: 50, // 放大条位置（底部）
                 height: 20, // 放大条高度
                 // 仅针对横轴缩放/移动
-                zoomOnMouseWheel: { enable: true, type: 'all' }, // 滚轮仅缩放横轴
-                moveOnMouseMove: { enable: true, type: 'all' }, // 拖动仅移动横轴
+                zoomOnMouseWheel: {enable: true, type: 'all'}, // 滚轮仅缩放横轴
+                moveOnMouseMove: {enable: true, type: 'all'}, // 拖动仅移动横轴
                 // 样式优化
                 backgroundColor: 'rgba(240,240,240,0.8)',
-                dataBackground: { areaStyle: { color: 'rgba(150,180,250,0.2)' }, lineStyle: { color: '#88b7ff' } },
+                dataBackground: {areaStyle: {color: 'rgba(150,180,250,0.2)'}, lineStyle: {color: '#88b7ff'}},
                 fillerColor: 'rgba(100,140,255,0.3)',
-                handleStyle: { color: '#0c42da', borderColor: '#0831a8' },
-                textStyle: { fontSize: 10 }
+                handleStyle: {color: '#0c42da', borderColor: '#0831a8'},
+                textStyle: {fontSize: 10}
             },
             {
                 type: 'inside', // 内置型（鼠标滚轮/拖拽画布缩放）
@@ -152,8 +160,8 @@ const getOption = (scatterData, lineData) => {
                     width: 2,
                     type: 'solid'         // 红色实线 y=x
                 },
-                tooltip: { show: false }, // 红线不触发提示框
-                emphasis: { scale: false },
+                tooltip: {show: false}, // 红线不触发提示框
+                emphasis: {scale: false},
                 smooth: false,
                 animation: false,
                 large: true               // 虽然只有两个点，但统一优化风格
@@ -172,7 +180,7 @@ const updateChart = () => {
     if (!myChart) return
 
     // 显示加载动画，确保大数据量时用户有反馈
-    myChart.showLoading({ text: '数据加载中...', maskColor: 'rgba(255, 255, 255, 0.8)' })
+    myChart.showLoading({text: '数据加载中...', maskColor: 'rgba(255, 255, 255, 0.8)'})
 
     // 使用 setTimeout 异步处理数据组装，防止阻塞 UI 线程
     setTimeout(() => {
@@ -219,7 +227,7 @@ const updateChart = () => {
         ]
 
         // 设置图表配置，notMerge: true 完全替换，避免旧配置干扰
-        myChart.setOption(getOption(scatterData, lineData), { notMerge: true })
+        myChart.setOption(getOption(scatterData, lineData), {notMerge: true})
 
         // 数据渲染完成后，隐藏加载动画
         myChart.hideLoading()
@@ -235,7 +243,7 @@ const initChart = () => {
 }
 
 // 监听数据变化，更新图表（深度监听确保数组内容变化时触发）
-watch(() => [props.xData, props.yData], updateChart, { deep: true })
+watch(() => [props.xData, props.yData], updateChart, {deep: true})
 
 // 生命周期：挂载时初始化，绑定窗口自适应
 onMounted(() => {

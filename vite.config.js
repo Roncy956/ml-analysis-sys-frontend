@@ -12,6 +12,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  assetsInclude: ['**/*.svg'], // 识别SVG文件
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
