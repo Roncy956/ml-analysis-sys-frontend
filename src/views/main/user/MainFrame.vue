@@ -75,7 +75,7 @@ onMounted(() => {
                     </button>
                     <div tabindex="0" role="button"
                          class="bg-neutral text-neutral-content btn btn-ghost btn-circle avatar">
-                        <span class="text-xl">AI</span>
+                        <span class="text-xl">U</span>
                     </div>
                 </div>
                 <ul

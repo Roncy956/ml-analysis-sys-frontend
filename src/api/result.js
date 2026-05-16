@@ -5,19 +5,24 @@ import LightGBM from '@/json/LightGBM.json'
 import CatBoost from '@/json/CatBoost.json'
 import Ensemble from '@/json/Ensemble.json'
 import MapData from '@/json/MapData.json'
+import TablePage from '@/json/TablePage.json'
+import TableLen from '@/json/TableLen.json'
 
 export function getMapData(data) {
     // return request.get(`/ml/yearly-city-export`);
     return Promise.resolve(MapData)
 }
 
-export function getTablePage(page, pageSize){
-    return request(`/ml/table?page=${page}&pageSize=${pageSize}`)
+export function getTablePage(page, pageSize) {
+    // return request(`/ml/table?page=${page}&pageSize=${pageSize}`)
+    return Promise.resolve(TablePage)
 }
 
 export function getTableLen(data){
-    return request(`/ml/table/len`)
+    // return request(`/ml/table/len`)
+    return Promise.resolve(TableLen)
 }
+
 
 // 获取随机森林的数据
 export function getRandomForestData(data) {
