@@ -5,7 +5,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import * as echarts from 'echarts'
-import chinaJson from '@/json/china.json'
+import chinaJson from '@/json/ChinaMapData.json'
 
 const mapRef = ref(null)
 let myChart = null

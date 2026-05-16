@@ -1,5 +1,5 @@
 <script setup>
-import BarChart from "@/components/echarts/BarChart.vue";
+import BarHorizontalChart from "@/components/echarts/BarHorizontalChart.vue";
 import {onMounted, onUnmounted, ref, watch} from "vue";
 import ScatterPredictionChart from "@/components/echarts/ScatterPredictionChart.vue";
 import { getCatBoostData } from "@/api/result.js";
@@ -113,26 +113,26 @@ onUnmounted(() => {
                             CatBoost<br>模型性能评估：
                         </div>
                         <div class="flex flex-col">
-                            <div class="text-1xl">
+                            <div class="text-[20px]">
                                 训练集 R²：{{ formatNumber(trainR2) }}
                             </div>
-                            <div class="text-1xl">
+                            <div class="text-[20px]">
                                 测试集 R²：{{ formatNumber(testR2) }}
                             </div>
                         </div>
                         <div class="flex flex-col">
-                            <div class="text-1xl">
+                            <div class="text-[20px]">
                                 训练集 MSE：{{ formatNumber(trainMSE) }}
                             </div>
-                            <div class="text-1xl">
+                            <div class="text-[20px]">
                                 测试集 MSE：{{ formatNumber(testMSE) }}
                             </div>
                         </div>
                         <div class="flex flex-col">
-                            <div class="text-1xl">
+                            <div class="text-[20px]">
                                 测试集 MAE：{{ formatNumber(testMAE) }}
                             </div>
-                            <div class="text-1xl">
+                            <div class="text-[20px]">
                                 测试集 RMSE：{{ formatNumber(testRMSE) }}
                             </div>
                         </div>
@@ -163,7 +163,7 @@ onUnmounted(() => {
 
             <!-- 卡片 1：等宽 flex-1，阴影，圆角 -->
             <div v-if="showImportChart" class="card card-body p-0 bg-base-150 shadow-sm h-full w-8/16 max-w-7/16">
-                <BarChart
+                <BarHorizontalChart
                     :title="barChartTitle"
                     :yData="feature"
                     :series="importance"
@@ -190,8 +190,8 @@ onUnmounted(() => {
                     :yData="residualsList"
                     :xAxisName="residualsPredictedListName"
                     :yAxisName="residualsListName"
-                    :start-zoom="5"
-                    :end-zoom="15"
+                    :start-zoom="0"
+                    :end-zoom="20"
                 />
             </div>
         </div>

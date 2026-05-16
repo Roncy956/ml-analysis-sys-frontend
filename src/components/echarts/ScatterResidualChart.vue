@@ -50,7 +50,7 @@ const props = defineProps({
     },
     startZoom: {
         type: Number,
-        default: 5
+        default: 0
     },
     endZoom: {
         type: Number,
@@ -62,17 +62,16 @@ const chartRef = ref(null)
 let myChart = null
 
 /**
- * 获取高性能散点图配置（包含 y=x 红线 + 仅横轴缩放的dataZoom）
+ * 获取高性能散点图配置（移除 y=x 红线，仅保留散点 + 仅横轴缩放的dataZoom）
  * @param {Array} scatterData 散点数据 [[x, y], ...]
- * @param {Array} lineData 红线数据 [[min, min], [max, max]]
  */
-const getOption = (scatterData, lineData) => {
+const getOption = (scatterData) => { // 移除 lineData 参数
     return {
         title: {text: props.title || '散点图', left: 'center'},
         tooltip: {
             trigger: 'item',
             formatter: (params) => {
-                // 只对散点系列显示 tooltip，红线不显示
+                // 只对散点系列显示 tooltip
                 if (params.seriesType === 'scatter') {
                     return `(${params.data[0].toFixed(2)}, ${params.data[1].toFixed(2)})`
                 }
@@ -149,23 +148,8 @@ const getOption = (scatterData, lineData) => {
                 emphasis: {
                     disabled: true        // 禁用高亮以避免2万数据卡顿
                 }
-            },
-            {
-                type: 'line',
-                name: 'y = x',
-                data: lineData,
-                symbol: 'none',           // 不显示数据点标记
-                lineStyle: {
-                    color: 'red',
-                    width: 2,
-                    type: 'solid'         // 红色实线 y=x
-                },
-                tooltip: {show: false}, // 红线不触发提示框
-                emphasis: {scale: false},
-                smooth: false,
-                animation: false,
-                large: true               // 虽然只有两个点，但统一优化风格
             }
+            // 移除红线对应的 line 系列配置
         ],
         // 关闭整体动画，依靠 progressive 实现流畅加载
         animation: false
@@ -173,7 +157,7 @@ const getOption = (scatterData, lineData) => {
 }
 
 /**
- * 更新图表（包含加载动画、数据组装、红线计算）
+ * 更新图表（包含加载动画、数据组装，移除红线计算逻辑）
  * 优化至2万条数据流畅渲染
  */
 const updateChart = () => {
@@ -188,10 +172,8 @@ const updateChart = () => {
         const yVals = props.yData
         const len = Math.min(xVals.length, yVals.length)
 
-        // 一次遍历生成散点数据，同时计算全局极值用于红线
+        // 一次遍历生成散点数据
         const scatterData = []
-        let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
-
         for (let i = 0; i < len; i++) {
             const x = xVals[i]
             const y = yVals[i]
@@ -199,35 +181,10 @@ const updateChart = () => {
             if (typeof x !== 'number' || typeof y !== 'number' || isNaN(x) || isNaN(y)) continue
 
             scatterData.push([x, y])
-            if (x < minX) minX = x
-            if (x > maxX) maxX = x
-            if (y < minY) minY = y
-            if (y > maxY) maxY = y
         }
-
-        // 计算 y=x 红线的范围（取所有数据的全局最小最大值，确保线条贯穿视图）
-        let globalMin = 0, globalMax = 1
-        if (scatterData.length > 0) {
-            globalMin = Math.min(minX, minY)
-            globalMax = Math.max(maxX, maxY)
-            // 避免最小最大值相等导致红线不可见
-            if (globalMin === globalMax) {
-                globalMin = globalMin - 1
-                globalMax = globalMax + 1
-            }
-        } else {
-            // 无有效数据时的默认红线范围（不影响展示）
-            globalMin = 0
-            globalMax = 1
-        }
-
-        const lineData = [
-            [globalMin, globalMin],
-            [globalMax, globalMax]
-        ]
 
         // 设置图表配置，notMerge: true 完全替换，避免旧配置干扰
-        myChart.setOption(getOption(scatterData, lineData), {notMerge: true})
+        myChart.setOption(getOption(scatterData), {notMerge: true}) // 移除 lineData 参数
 
         // 数据渲染完成后，隐藏加载动画
         myChart.hideLoading()

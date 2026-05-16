@@ -1,0 +1,28 @@
+{
+    "code": 1,
+    "data": [
+        {
+            "id": 1,
+            "location": 12,
+            "product": "3011000",
+            "value": 35927,
+            "year": 2000,
+            "diversity": 51,
+            "ubiquity": 4,
+            "mcp": false,
+            "eci": -1.105497056,
+            "pci": 1.179967195,
+            "density": 0.068825911,
+            "coi": -1.209832616,
+            "cog": 0.978661849,
+            "rca": 0.288354733,
+            "productName": "观赏鱼",
+            "type": "marine fishery",
+            "color": "#012030",
+            "totalValueByYear": 14342145650,
+            "totalValueByYearLocation": 1231547202,
+            "totalValueByYearProduct": 1450965,
+            "totalValueByYearType": 3930866778,
+            "totalValueByYearLocationType": 70342089,
+            "totalValueByYearTypeLocation": 70342089
+        },

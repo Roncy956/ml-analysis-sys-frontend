@@ -6,6 +6,7 @@ import forestSvgRaw from "@/assets/forest.svg?raw";
 import xgboostSvgRaw from "@/assets/XGBoost.svg?raw";
 import LightGBMSvgRaw from "@/assets/LightGBM.svg?raw";
 import CatBoostSvgRaw from "@/assets/CatBoost.svg?raw";
+import EnsembleSvgRaw from "@/assets/ensemble.svg?raw";
 import {processSvg} from "@/utils/SvgUtil.js";
 
 // 预处理 SVG 图标（只在组件初始化时执行一次，性能友好）
@@ -14,6 +15,9 @@ const forestSvgHtml = processSvg(forestSvgRaw);
 const xgboostSvgHtml = processSvg(xgboostSvgRaw)
 const LightGBMSvgHtml = processSvg(LightGBMSvgRaw);
 const CatBoostSvgHtml = processSvg(CatBoostSvgRaw);
+const EnsembleSvgHtml = processSvg(EnsembleSvgRaw);
+
+
 
 const showText = ref(false);
 const activePath = ref();
@@ -22,7 +26,8 @@ const menu = [
     {name: "随机森林 Random Forest", path: "/data-analysis/random-forest", iconHtml: forestSvgHtml},
     {name: "XGBoost", path: "/data-analysis/xgboost", iconHtml: xgboostSvgHtml},
     {name: "LightGBM", path: "/data-analysis/light-gbm", iconHtml: LightGBMSvgHtml},
-    {name: "CatBoost", path: "/data-analysis/cat-boost", iconHtml: CatBoostSvgHtml}
+    {name: "CatBoost", path: "/data-analysis/cat-boost", iconHtml: CatBoostSvgHtml},
+    {name: "集成模型", path: "/data-analysis/ensemble", iconHtml: EnsembleSvgHtml},
 ];
 
 const router = useRouter();

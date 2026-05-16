@@ -46,7 +46,7 @@
 
 <template>
     <button class="button" data-text="Awesome">
-        <span class="actual-text">&nbsp;uiverse&nbsp;</span>
-        <span aria-hidden="true" class="hover-text">&nbsp;uiverse&nbsp;</span>
+        <span class="actual-text">&nbsp;Analysis&nbsp;</span>
+        <span aria-hidden="true" class="hover-text">&nbsp;Analysis&nbsp;</span>
     </button>
 </template>

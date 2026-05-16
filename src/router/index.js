@@ -8,6 +8,7 @@ import RandomForest from "@/views/main/user/ml/RandomForest.vue";
 import XGBoost from "@/views/main/user/ml/XGBoost.vue";
 import LightGBM from "@/views/main/user/ml/LightGBM.vue";
 import CatBoost from "@/views/main/user/ml/CatBoost.vue";
+import Ensemble from "@/views/main/user/ml/Ensemble.vue";
 import PersonalHomepage from "@/views/main/user/profile/PersonalHomepage.vue";
 import PersonalSetting from "@/views/main/user/profile/PersonalSetting.vue";
 import AuthForm from "@/views/auth/AuthForm.vue";
@@ -63,6 +64,10 @@ const router = createRouter({
                             path: 'cat-boost',
                             component: CatBoost,
                         },
+                        {
+                            path: 'ensemble',
+                            component: Ensemble,
+                        }
                     ]
                 },
             ]
