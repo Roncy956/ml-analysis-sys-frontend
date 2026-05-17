@@ -22,33 +22,34 @@ const successMessage = ref()
 let hideSuccessTimer = null;
 
 async function submit() {
-    if (isLogin.value) {
-        // 登录分支
-        if (isUser.value) {
-            const judge = await loginUser()
-            if (judge) {
-                await router.push('/homepage')
-            }
-        } else {
-            const judge = await loginAdmin()
-            if (judge) {
-                await router.push('/homepage')
-            }
-        }
-    } else {
-        // 注册分支
-        if (isUser.value) {
-            const judge = await registerUser()
-            if (judge) {
-                isLogin.value = true
-            }
-        } else {
-            const judge = await registerAdmin()
-            if (judge) {
-                isLogin.value = true
-            }
-        }
-    }
+    await router.push('/homepage')
+    // if (isLogin.value) {
+    //     // 登录分支
+    //     if (isUser.value) {
+    //         const judge = await loginUser()
+    //         if (judge) {
+    //             await router.push('/homepage')
+    //         }
+    //     } else {
+    //         const judge = await loginAdmin()
+    //         if (judge) {
+    //             await router.push('/homepage')
+    //         }
+    //     }
+    // } else {
+    //     // 注册分支
+    //     if (isUser.value) {
+    //         const judge = await registerUser()
+    //         if (judge) {
+    //             isLogin.value = true
+    //         }
+    //     } else {
+    //         const judge = await registerAdmin()
+    //         if (judge) {
+    //             isLogin.value = true
+    //         }
+    //     }
+    // }
 }
 
 // 用户登录逻辑
